@@ -11,6 +11,8 @@ class ListNode {
 	}
 }
 
+// 1. С помощью if-else условий
+
 func reverseList(node: ListNode) -> ListNode {
 	
 	var newNode = node
@@ -40,6 +42,23 @@ func reverseList(node: ListNode) -> ListNode {
 	return reverseNode
 }
 
+// 2. С помощью присвоения "подготовленных" значений текущей ноды обратной
+
+func reverseList2(node: ListNode) -> ListNode {
+	
+	var currentNode: ListNode? = node
+	var reverseNode: ListNode!
+	var nextNode: ListNode?
+	
+	while currentNode != nil {
+		nextNode = currentNode?.next
+		currentNode?.next = reverseNode
+		reverseNode = currentNode
+		currentNode = nextNode
+	}
+	return reverseNode
+}
+
 func createNode(from array: [Int]) -> ListNode? {
 	
 	var node: ListNode?
@@ -60,3 +79,4 @@ var array = [1, 6, 3, 8, 4, 5, 1, 2, 7, 7, 7, 3]
 let node = createNode(from: array) ?? ListNode(value: -1, next: nil)
 
 dump(reverseList(node: node))
+dump(reverseList2(node: node))
